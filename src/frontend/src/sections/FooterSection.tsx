@@ -1,7 +1,9 @@
 import { Heart } from 'lucide-react';
-import { valentineContent } from '../config/valentineContent';
+import { usePersonalization } from '../personalization/PersonalizationContext';
 
 export default function FooterSection() {
+  const { content } = usePersonalization();
+  
   const appIdentifier = encodeURIComponent(
     typeof window !== 'undefined' ? window.location.hostname : 'valentine-app'
   );
@@ -14,7 +16,7 @@ export default function FooterSection() {
       
       <div className="relative z-10 max-w-4xl mx-auto text-center">
         <p className="text-2xl md:text-3xl text-romantic-red font-bold mb-6 flex items-center justify-center gap-3">
-          {valentineContent.footer.text}
+          {content.footer.text}
           <Heart className="w-8 h-8 text-romantic-red fill-romantic-red animate-heartbeat" />
         </p>
         

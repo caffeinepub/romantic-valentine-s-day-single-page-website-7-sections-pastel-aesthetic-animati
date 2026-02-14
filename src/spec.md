@@ -1,18 +1,13 @@
 # Specification
 
 ## Summary
-**Goal:** Build a responsive, single-page Valentine’s Day website with a pastel romantic aesthetic, subtle animations, a gallery, and a surprise reveal (with optional music placeholder).
+**Goal:** Let users personalize the page’s text, gallery photos, and background music at runtime, with changes saved locally in the browser.
 
 **Planned changes:**
-- Implement one-page layout with 7 sections in order: Hero, Our Story, Why I Love You, Gallery, Love Letter, Special Surprise, Footer.
-- Apply consistent pastel pink/red/white/lavender styling, smooth scrolling, gentle hover effects, and lightweight heart-themed animations.
-- Hero: exact heading/subheading text, floating-hearts effect, and “Open My Heart 💌” button that scrolls to the next section.
-- Our Story: title, provided story text with preserved line breaks, and a responsive timeline/cards for First Meeting, First Memory, and Today.
-- Why I Love You: render sample reasons as heart-icon cards and allow adding new reasons via a client-side input + add action.
-- Gallery: responsive grid of placeholder images with caption “[ADD OUR PHOTOS HERE]” and subtle hover zoom.
-- Love Letter: handwritten-style Google Font for letter content, provided message text, and a floating heart background animation.
-- Special Surprise: “Click for a Surprise 💖” button that reveals the hidden message (with editable name) and an optional local-audio placeholder that fails gracefully if missing.
-- Footer: exact text “Forever Yours, Bubu 💞” with a small subtle heart animation.
-- Centralize all editable content (names, text, timeline entries, reasons, gallery items, surprise message, and music path) into a single frontend constants/config structure.
+- Add a “Customize” entry point that opens an in-page panel/modal/drawer for editing content across Hero, Our Story, Reasons, Love Letter, Surprise, and Footer.
+- Implement apply/save and “Reset to defaults” (restore original values from `frontend/src/config/valentineContent.ts`).
+- Persist customized copy, selected gallery images (as locally stored representations), and selected music in `localStorage`, with safe fallback to defaults if unavailable/cleared.
+- Add gallery image replacement via local file pickers with previews, persistence, and graceful fallback to default placeholder on load failure.
+- Add background music selection via either configured `valentineContent.surprise.musicPath` or a user-selected local audio file, ensuring playback is user-initiated and providing Play/Pause controls after reveal plus a clear placeholder message when no music is available.
 
-**User-visible outcome:** Visitors can scroll through a romantic 7-section Valentine’s page with subtle animations, view a placeholder photo gallery, add reasons on the fly, reveal a surprise message, and optionally see a music placeholder ready for a local song file.
+**User-visible outcome:** Users can open a Customize panel to edit all major on-page text, swap gallery photos, and choose background music; their choices persist after refresh and can be reset to the original defaults.

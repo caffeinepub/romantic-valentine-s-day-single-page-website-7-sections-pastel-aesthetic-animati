@@ -3,10 +3,11 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Heart, Plus } from 'lucide-react';
-import { valentineContent } from '../config/valentineContent';
+import { usePersonalization } from '../personalization/PersonalizationContext';
 
 export default function ReasonsILoveYouSection() {
-  const [reasons, setReasons] = useState<string[]>(valentineContent.reasons.list);
+  const { content } = usePersonalization();
+  const [reasons, setReasons] = useState<string[]>(content.reasons.list);
   const [newReason, setNewReason] = useState('');
 
   const handleAddReason = () => {
@@ -26,7 +27,7 @@ export default function ReasonsILoveYouSection() {
     <section className="py-20 px-4 bg-gradient-to-b from-pastel-lavender/30 to-white/80">
       <div className="max-w-6xl mx-auto">
         <h2 className="text-4xl md:text-5xl font-bold text-center text-romantic-red mb-12">
-          {valentineContent.reasons.title}
+          {content.reasons.title}
         </h2>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">

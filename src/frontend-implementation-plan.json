@@ -1,291 +1,168 @@
 {
   "kind": "implementation_plan",
   "version": "1.0",
-  "title": "Valentine’s Day single-page site (pastel aesthetic, animations, gallery, surprise, optional music)",
+  "title": "In-app personalization for Valentine page (copy, photos, music)",
   "requirements": [
     {
-      "id": "REQ-1",
-      "summary": "Implement a single-page layout rendering the 7 required sections in order with responsive spacing and visual separation.",
+      "id": "REQ-11",
+      "summary": "Add an in-page Customize panel to edit all main copy sections at runtime, apply changes immediately, and reset to defaults from valentineContent.",
       "acceptanceCriteria": [
-        "All 7 sections render on one page in the specified order.",
-        "Each section has the specified title text (including emojis) and is visually distinct via spacing/background accents.",
-        "Layout is responsive and works on mobile and desktop without horizontal scrolling."
+        "A “Customize” entry point is available on the page (e.g., a small floating button or a top-of-page link) and opens a panel/modal/drawer.",
+        "The panel exposes editable fields for the main text content across all sections (Hero, Our Story, Reasons, Love Letter, Surprise, Footer).",
+        "Edits are immediately reflected in the rendered page after saving/applying changes.",
+        "A “Reset to defaults” action restores the original values from frontend/src/config/valentineContent.ts."
       ],
       "file_operations": [
         {
-          "path": "frontend/src/App.tsx",
+          "path": "frontend/src/personalization/types.ts",
           "operation": "create",
-          "description": "Create the single-page app composition that renders the 7 sections in the required order and wires in-section anchors/refs for navigation (no multi-page routing)."
+          "description": "Define TypeScript types for personalized Valentine content (copy fields for Hero/Story/Reasons/LoveLetter/Surprise/Footer) and a patch/update shape used by the Customize UI."
         },
         {
-          "path": "frontend/src/pages/ValentineSinglePage.tsx",
+          "path": "frontend/src/personalization/PersonalizationContext.tsx",
           "operation": "create",
-          "description": "Create the single-page container that lays out the 7 sections with distinct spacing/background accents and responsive constraints."
+          "description": "Create a React context/provider that exposes (a) resolved content (defaults merged with user overrides), (b) update/apply functions for copy fields, and (c) reset-to-defaults. This should be the single source of truth for sections to render from."
         },
         {
-          "path": "frontend/src/sections/HeroSection.tsx",
+          "path": "frontend/src/personalization/CustomizePanel.tsx",
           "operation": "create",
-          "description": "Create Hero section component (Section 1) with required heading/subheading and CTA wiring (scroll to Section 2)."
-        },
-        {
-          "path": "frontend/src/sections/OurStorySection.tsx",
-          "operation": "create",
-          "description": "Create Our Love Story section component (Section 2) with title, story paragraph rendering with line breaks, and timeline/cards area."
-        },
-        {
-          "path": "frontend/src/sections/ReasonsILoveYouSection.tsx",
-          "operation": "create",
-          "description": "Create Reasons I Love You section component (Section 3) with editable sample reasons and client-side add flow."
-        },
-        {
-          "path": "frontend/src/sections/GallerySection.tsx",
-          "operation": "create",
-          "description": "Create Gallery section component (Section 4) with responsive grid and placeholder tiles/captions."
-        },
-        {
-          "path": "frontend/src/sections/LoveLetterSection.tsx",
-          "operation": "create",
-          "description": "Create Love Letter section component (Section 5) with handwritten font usage and background heart animation layer."
-        },
-        {
-          "path": "frontend/src/sections/SpecialSurpriseSection.tsx",
-          "operation": "create",
-          "description": "Create Special Surprise section component (Section 6) with reveal interaction and optional music placeholder UI."
-        },
-        {
-          "path": "frontend/src/sections/FooterSection.tsx",
-          "operation": "create",
-          "description": "Create Footer section component (Section 7) with exact footer text and subtle heart animation."
-        }
-      ]
-    },
-    {
-      "id": "REQ-2",
-      "summary": "Apply the pastel Valentine theme, smooth scrolling, gentle hover states, and lightweight animations across the page.",
-      "acceptanceCriteria": [
-        "Site uses a consistent pastel palette (pink/red/white/lavender) across backgrounds, text accents, buttons, and cards.",
-        "Smooth scrolling is enabled for in-page navigation/CTA scroll actions.",
-        "Hover states exist for buttons/cards/gallery items and are subtle (e.g., small lift/soft glow/scale).",
-        "Animations are lightweight and do not cause noticeable jank on mobile."
-      ],
-      "file_operations": [
-        {
-          "path": "frontend/src/index.css",
-          "operation": "create",
-          "description": "Create global Tailwind entry CSS defining pastel theme CSS variables, base typography, section spacing defaults, and enable smooth scrolling (scroll-behavior) without heavy effects."
-        },
-        {
-          "path": "frontend/tailwind.config.js",
-          "operation": "modify",
-          "description": "Extend Tailwind with lightweight keyframes/animations (e.g., gentle float, subtle pulse, soft fade) and reusable design tokens consistent with pastel pink/red/white/lavender styling."
-        },
-        {
-          "path": "frontend/src/components/SectionShell.tsx",
-          "operation": "create",
-          "description": "Create a reusable section wrapper for consistent padding, max-width, background accents, and subtle hover/animation patterns used by multiple sections."
-        }
-      ]
-    },
-    {
-      "id": "REQ-3",
-      "summary": "Build the Hero section with exact text, floating hearts animation, and a button that smoothly scrolls to the next section.",
-      "acceptanceCriteria": [
-        "Hero displays heading: \"Happy Valentine’s Day, Paari ❤️\" and subheading: \"Every heartbeat of mine belongs to you\" (with Paari easily editable as a placeholder).",
-        "Hero contains an animated hearts effect (e.g., floating hearts) without heavy CPU usage.",
-        "Clicking “Open My Heart 💌” smoothly scrolls to the Our Story section."
-      ],
-      "file_operations": [
-        {
-          "path": "frontend/src/sections/HeroSection.tsx",
-          "operation": "modify",
-          "description": "Implement the Hero UI with exact heading/subheading from centralized config, add a lightweight floating-hearts background layer, and wire the “Open My Heart 💌” action to smooth-scroll to the Our Story section. Use shadcn/ui Button for the CTA (Verify the component's usage instructions before implementing)."
-        },
-        {
-          "path": "frontend/src/components/HeartsBackground.tsx",
-          "operation": "create",
-          "description": "Create a lightweight decorative floating-hearts background component (CSS-driven and performance-conscious) reusable for Hero and Love Letter."
-        },
-        {
-          "path": "frontend/src/config/valentineContent.ts",
-          "operation": "create",
-          "description": "Centralize editable Hero text (including the name placeholder “Paari”) and section anchor IDs for scroll targets."
-        }
-      ]
-    },
-    {
-      "id": "REQ-4",
-      "summary": "Build the Our Love Story section with exact title, formatted story text with line breaks, and responsive timeline/cards entries.",
-      "acceptanceCriteria": [
-        "Section title exactly matches: “Our Story 💕”.",
-        "The provided story text is displayed in full and formatted with paragraph spacing/line breaks.",
-        "Timeline/cards display the three entries with the exact provided values and are responsive (stack on mobile, multi-column on larger screens).",
-        "All text values are easy to edit from a single constants/config area in the frontend code."
-      ],
-      "file_operations": [
-        {
-          "path": "frontend/src/sections/OurStorySection.tsx",
-          "operation": "modify",
-          "description": "Render the exact title “Our Story 💕”, display the provided story paragraph preserving line breaks, and show the three timeline entries as responsive cards. Use shadcn/ui Card for timeline/cards styling (Verify the component's usage instructions before implementing)."
-        },
-        {
-          "path": "frontend/src/config/valentineContent.ts",
-          "operation": "modify",
-          "description": "Add editable story text (including line breaks) and the three timeline entries (First Meeting, First Memory, Today) in a single config object."
-        }
-      ]
-    },
-    {
-      "id": "REQ-5",
-      "summary": "Build the Reasons I Love You section with heart-icon cards, sample reasons, and a client-side input to add more reasons.",
-      "acceptanceCriteria": [
-        "Section title exactly matches: “Why I Love You 💖”.",
-        "Sample reasons render as individual cards with heart iconography.",
-        "There is a text input and an “Add” action that appends a new reason card immediately (no page reload).",
-        "Added reasons remain visible while the page is open (no backend persistence required).",
-        "Reasons list is easy to edit from a single constants/config area in the frontend code."
-      ],
-      "file_operations": [
-        {
-          "path": "frontend/src/sections/ReasonsILoveYouSection.tsx",
-          "operation": "modify",
-          "description": "Implement the card grid with heart iconography, render sample reasons from centralized config, and add client-side state to append new reasons via an input + add action. Use shadcn/ui Card, Input, and Button for the form and cards (Verify the component's usage instructions before implementing)."
-        },
-        {
-          "path": "frontend/src/config/valentineContent.ts",
-          "operation": "modify",
-          "description": "Add an editable array of sample reasons and any related microcopy so all initial reasons live in one constants/config area."
-        },
-        {
-          "path": "frontend/public/assets/generated/heart-icons.dim_256x256.png",
-          "operation": "create",
-          "description": "Add generated heart icon asset to be used for heart-themed decoration in the Reasons cards and other subtle UI accents."
-        }
-      ]
-    },
-    {
-      "id": "REQ-6",
-      "summary": "Build the Gallery section with exact title, responsive grid of placeholder images/captions, and soft zoom hover animation.",
-      "acceptanceCriteria": [
-        "Section title exactly matches: “My Favorite Moments With You 📸”.",
-        "Gallery renders a responsive grid (1 column on small screens, multiple columns on larger screens).",
-        "Gallery items use placeholder images and show caption text “[ADD OUR PHOTOS HERE]”.",
-        "Hovering a gallery item applies a subtle zoom (and/or slight lift) animation."
-      ],
-      "file_operations": [
-        {
-          "path": "frontend/src/sections/GallerySection.tsx",
-          "operation": "modify",
-          "description": "Implement responsive grid gallery rendering items from centralized config, use the required placeholder caption text, and apply a subtle hover zoom/lift animation (Tailwind + lightweight transition)."
-        },
-        {
-          "path": "frontend/src/config/valentineContent.ts",
-          "operation": "modify",
-          "description": "Add editable gallery items (image path + caption) defaulting to placeholders with caption “[ADD OUR PHOTOS HERE]”."
-        },
-        {
-          "path": "frontend/public/assets/generated/gallery-placeholder.dim_800x800.png",
-          "operation": "create",
-          "description": "Add generated placeholder photo tile asset used for gallery items until real photos are added."
-        }
-      ]
-    },
-    {
-      "id": "REQ-7",
-      "summary": "Build the Love Letter section with exact title, handwritten Google Font for letter content, provided message text, and floating-heart background animation.",
-      "acceptanceCriteria": [
-        "Section title exactly matches: “A Letter Just for You 💌”.",
-        "Letter text uses a handwritten-style Google Font (loaded via frontend).",
-        "The provided message renders exactly (with bracketed editable portion maintained as a placeholder in code).",
-        "A lightweight floating-heart background animation is visible behind the letter content without harming readability."
-      ],
-      "file_operations": [
-        {
-          "path": "frontend/index.html",
-          "operation": "modify",
-          "description": "Load a handwritten-style Google Font (for Love Letter content) via the document head (link tags) to ensure consistent font loading across the site."
-        },
-        {
-          "path": "frontend/src/sections/LoveLetterSection.tsx",
-          "operation": "modify",
-          "description": "Render the exact title “A Letter Just for You 💌”, apply the handwritten Google Font to the letter content, render the provided message text from config (preserving bracketed editable portion), and layer the floating hearts background behind content with readability safeguards."
-        },
-        {
-          "path": "frontend/src/components/HeartsBackground.tsx",
-          "operation": "modify",
-          "description": "Ensure the hearts background component supports a softer/less-dense variant appropriate for the Love Letter section to preserve readability."
-        },
-        {
-          "path": "frontend/src/config/valentineContent.ts",
-          "operation": "modify",
-          "description": "Add editable Love Letter message content (including the bracketed placeholder segment) and any section-level styling toggles (e.g., background density)."
-        }
-      ]
-    },
-    {
-      "id": "REQ-8",
-      "summary": "Build the Special Surprise section with reveal button, hidden message, and an optional local-music placeholder UI that fails gracefully if missing.",
-      "acceptanceCriteria": [
-        "Section title exactly matches: “One Last Thing… 🎁”.",
-        "Clicking “Click for a Surprise 💖” reveals the hidden message with “Paari” easily editable as a placeholder.",
-        "An audio element/control is present but uses a clearly labeled placeholder source (local file) so the user can add their song later (no external integrations required).",
-        "If no music file is provided, the UI does not break (shows a friendly placeholder state)."
-      ],
-      "file_operations": [
-        {
-          "path": "frontend/src/sections/SpecialSurpriseSection.tsx",
-          "operation": "modify",
-          "description": "Implement the reveal interaction for the hidden message, sourcing text (including “Paari” placeholder) from centralized config. Add an optional audio control that uses a configurable local asset path and shows a friendly placeholder if absent. Use shadcn/ui Button for the reveal action (Verify the component's usage instructions before implementing)."
-        },
-        {
-          "path": "frontend/src/config/valentineContent.ts",
-          "operation": "modify",
-          "description": "Add editable surprise message text and an optional music asset path (local) plus placeholder labels used when the music file is not present."
-        },
-        {
-          "path": "frontend/public/assets/music/ADD_OUR_SONG_HERE.mp3",
-          "operation": "create",
-          "description": "Add a clearly named placeholder local audio asset file path for later replacement; the UI should also handle when this file is removed or not provided."
-        }
-      ]
-    },
-    {
-      "id": "REQ-9",
-      "summary": "Build the Footer with the exact text and a subtle heart animation that remains readable on mobile.",
-      "acceptanceCriteria": [
-        "Footer displays: “Forever Yours, Bubu 💞” with “Bubu” easily editable as a placeholder.",
-        "A small, subtle heart animation appears in or near the footer.",
-        "Footer remains readable and properly spaced on mobile."
-      ],
-      "file_operations": [
-        {
-          "path": "frontend/src/sections/FooterSection.tsx",
-          "operation": "modify",
-          "description": "Render the exact footer text from centralized config and add a subtle heart animation (lightweight CSS animation) that does not affect readability or mobile spacing."
-        },
-        {
-          "path": "frontend/src/config/valentineContent.ts",
-          "operation": "modify",
-          "description": "Add editable footer name placeholder (“Bubu”) and footer display text in the centralized config."
-        }
-      ]
-    },
-    {
-      "id": "REQ-10",
-      "summary": "Centralize all editable site content (names, text, timeline, reasons, gallery, love letter, surprise, and optional music path) into a single frontend config/constants module.",
-      "acceptanceCriteria": [
-        "There is a single, clearly labeled configuration/constants area in the frontend code that contains the editable values.",
-        "Replacing placeholder values (e.g., names, dates, image paths, music path) updates the rendered site without hunting across multiple files."
-      ],
-      "file_operations": [
-        {
-          "path": "frontend/src/config/valentineContent.ts",
-          "operation": "modify",
-          "description": "Finalize a single exported configuration/constants object that contains every editable value requested (names, headings, story, timeline, reasons, gallery captions/images, love letter text, surprise message, optional music path)."
+          "description": "Implement the in-page Customize panel UI with editable inputs/textarea fields for Hero name/heading/subheading, Our Story story text, Reasons list items, Love Letter text, Surprise message, and Footer name/text; include Apply/Close and Reset-to-defaults actions. Use shadcn-ui components (e.g., Button, Input, Card, etc.) to compose the panel UI without modifying anything under frontend/src/components/ui. Verify the component's usage instructions before implementing."
         },
         {
           "path": "frontend/src/pages/ValentineSinglePage.tsx",
           "operation": "modify",
-          "description": "Refactor the page and section composition to consume all copy, names, image paths, and media paths exclusively from the centralized config module."
+          "description": "Wire the Customize entry point (e.g., floating button) into the single-page layout and mount CustomizePanel; wrap the page (or relevant subtree) in the Personalization provider so all sections can read personalized content."
+        },
+        {
+          "path": "frontend/src/sections/HeroSection.tsx",
+          "operation": "modify",
+          "description": "Switch Hero rendering to consume personalized content from the personalization context instead of importing valentineContent directly; ensure heading/name/subheading/CTA reflect customized values immediately."
+        },
+        {
+          "path": "frontend/src/sections/OurStorySection.tsx",
+          "operation": "modify",
+          "description": "Switch Our Story section rendering to consume personalized title/story/timeline text from the personalization context instead of importing valentineContent directly."
+        },
+        {
+          "path": "frontend/src/sections/ReasonsILoveYouSection.tsx",
+          "operation": "modify",
+          "description": "Switch Reasons section title/list rendering to consume personalized values from the personalization context; ensure the displayed list corresponds to customized items."
+        },
+        {
+          "path": "frontend/src/sections/LoveLetterSection.tsx",
+          "operation": "modify",
+          "description": "Switch Love Letter section rendering to consume personalized title/message from the personalization context instead of importing valentineContent directly."
+        },
+        {
+          "path": "frontend/src/sections/SpecialSurpriseSection.tsx",
+          "operation": "modify",
+          "description": "Switch Surprise section title/button/message rendering to consume personalized values from the personalization context; ensure customized surprise message is used after reveal."
+        },
+        {
+          "path": "frontend/src/sections/FooterSection.tsx",
+          "operation": "modify",
+          "description": "Switch Footer section text rendering to consume personalized footer name/text from the personalization context instead of importing valentineContent directly."
+        }
+      ]
+    },
+    {
+      "id": "REQ-12",
+      "summary": "Persist all personalization changes locally in the browser using localStorage with safe fallback behavior and reset clearing storage.",
+      "acceptanceCriteria": [
+        "After customizing and refreshing the page, the customized values are restored automatically.",
+        "Reset clears the saved customization and reverts to the default config values.",
+        "The site still works normally if localStorage is unavailable or cleared (falls back to defaults)."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/personalization/storage.ts",
+          "operation": "create",
+          "description": "Add localStorage helper utilities for loading/saving/clearing personalization state with robust error handling (try/catch) and schema/versioning as needed; return defaults when storage is unavailable."
+        },
+        {
+          "path": "frontend/src/personalization/PersonalizationContext.tsx",
+          "operation": "modify",
+          "description": "Integrate storage.ts so the provider hydrates personalization state from localStorage on startup, persists updates on apply, and clears storage on reset; ensure graceful fallback to defaults if storage is blocked or cleared."
+        },
+        {
+          "path": "frontend/src/personalization/CustomizePanel.tsx",
+          "operation": "modify",
+          "description": "Ensure Apply triggers persistence via the personalization provider and Reset clears persisted customizations; keep the UI responsive even if storage operations fail. Use shadcn-ui components to present actions without editing frontend/src/components/ui. Verify the component's usage instructions before implementing."
+        }
+      ]
+    },
+    {
+      "id": "REQ-13",
+      "summary": "Add image personalization for Gallery images via local file selection in the Customize panel with previews, localStorage persistence, reset, and graceful fallback on load failure.",
+      "acceptanceCriteria": [
+        "The Customize panel includes controls to replace each Gallery item image via a local file picker.",
+        "Selected images preview correctly in the panel and render in the Gallery grid in place of the placeholders.",
+        "Selections persist across refresh via localStorage (e.g., stored as data URLs) and can be reset to defaults.",
+        "If a selected image fails to load, the UI gracefully falls back to the default placeholder image."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/personalization/imageUtils.ts",
+          "operation": "create",
+          "description": "Add helpers to validate image file types/sizes (lightweight), convert selected image files to data URLs for previews/persistence, and safely revoke any object URLs if used."
+        },
+        {
+          "path": "frontend/src/personalization/types.ts",
+          "operation": "modify",
+          "description": "Extend personalization types to include gallery image overrides (e.g., per-index image data URL) while retaining default image paths from frontend/src/config/valentineContent.ts."
+        },
+        {
+          "path": "frontend/src/personalization/CustomizePanel.tsx",
+          "operation": "modify",
+          "description": "Add per-gallery-item file inputs in the Customize panel, show previews for selected images, and wire updates into personalization state so Gallery updates immediately. Use shadcn-ui components for consistent inputs/buttons without modifying frontend/src/components/ui. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/sections/GallerySection.tsx",
+          "operation": "modify",
+          "description": "Render gallery images from personalization context, preferring user-selected data URLs over default images. Add an image load error handler to gracefully fall back to the default placeholder at frontend/public/assets/generated/gallery-placeholder.dim_800x800.png when the selected image cannot be displayed."
+        },
+        {
+          "path": "frontend/src/personalization/storage.ts",
+          "operation": "modify",
+          "description": "Ensure gallery image overrides (data URLs) are included in the persisted personalization payload, with safe load handling and reset behavior."
+        }
+      ]
+    },
+    {
+      "id": "REQ-14",
+      "summary": "Add music personalization to set Surprise background music from config path or user-selected local audio file, with user-initiated playback only, play/pause controls after reveal, persistence, reset, and a clear placeholder when unavailable.",
+      "acceptanceCriteria": [
+        "A local audio file can be selected in the Customize panel and used as the Surprise section’s music source.",
+        "Music playback only starts as a result of an explicit user interaction (e.g., clicking the Surprise reveal button or pressing Play).",
+        "After the surprise is revealed, the UI provides Play/Pause controls and reflects the current playing state.",
+        "Music selection persists across refresh via localStorage and can be reset to the default valentineContent.surprise.musicPath behavior.",
+        "If no music is available (no file selected and the configured path is missing), the UI shows a clear placeholder/instructional message (English)."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/personalization/audioUtils.ts",
+          "operation": "create",
+          "description": "Add helpers to validate audio file types, convert selected audio files to a persistable source (e.g., data URL), and expose a resolved music source that prefers user selection over default config path."
+        },
+        {
+          "path": "frontend/src/personalization/types.ts",
+          "operation": "modify",
+          "description": "Extend personalization types to include an optional Surprise music override (e.g., audio data URL) while retaining default behavior via valentineContent.surprise.musicPath."
+        },
+        {
+          "path": "frontend/src/personalization/CustomizePanel.tsx",
+          "operation": "modify",
+          "description": "Add a local audio file picker for Surprise music, show the selected file name/status, and wire changes into personalization state so SpecialSurpriseSection uses the chosen source. Use shadcn-ui components for inputs/actions without modifying frontend/src/components/ui. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/sections/SpecialSurpriseSection.tsx",
+          "operation": "modify",
+          "description": "Update Surprise music logic to use personalization-resolved music source (user-selected audio or default config path). Ensure playback only begins on explicit user interaction (reveal button click and/or Play button), provide Play/Pause controls only after reveal, sync UI playing state with the audio element, and show a clear English placeholder/instruction when no music source is available."
+        },
+        {
+          "path": "frontend/src/personalization/storage.ts",
+          "operation": "modify",
+          "description": "Persist and restore the selected audio override via localStorage; ensure Reset clears it and restores default valentineContent.surprise.musicPath behavior."
         }
       ]
     }

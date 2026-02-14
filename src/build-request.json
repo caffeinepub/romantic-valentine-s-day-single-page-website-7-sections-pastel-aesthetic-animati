@@ -1,215 +1,98 @@
 {
   "kind": "build_request",
-  "title": "Romantic Valentine’s Day single-page website (7 sections, pastel aesthetic, animations, gallery, surprise + optional music)",
+  "title": "Add in-app personalization for copy, photos, and background music",
   "priority": "normal",
   "requirements": [
     {
-      "id": "REQ-1",
-      "text": "Create a single-page Valentine’s Day website with 7 sections in this order: (1) Hero, (2) Our Love Story, (3) Reasons I Love You, (4) Gallery, (5) Love Letter, (6) Special Surprise, (7) Footer.",
+      "id": "REQ-11",
+      "text": "Add an in-page “Customize” panel that lets the user personalize the site copy (hero name/heading/subheading, story text, reasons list, love letter text, surprise message, footer name/text) at runtime without code changes.",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-1"
+          "msg-3"
         ],
         "quotes": [
-          "Website Structure:\n\n1. Hero Section (Landing Page)\n...\n7. Footer"
+          "Want to personalize the copy and images, and to add music and all"
         ]
       },
       "acceptanceCriteria": [
-        "All 7 sections render on one page in the specified order.",
-        "Each section has the specified title text (including emojis) and is visually distinct via spacing/background accents.",
-        "Layout is responsive and works on mobile and desktop without horizontal scrolling."
+        "A “Customize” entry point is available on the page (e.g., a small floating button or a top-of-page link) and opens a panel/modal/drawer.",
+        "The panel exposes editable fields for the main text content across all sections (Hero, Our Story, Reasons, Love Letter, Surprise, Footer).",
+        "Edits are immediately reflected in the rendered page after saving/applying changes.",
+        "A “Reset to defaults” action restores the original values from frontend/src/config/valentineContent.ts."
       ]
     },
     {
-      "id": "REQ-2",
-      "text": "Implement the requested theme and interaction design across the site: pastel pink/red/white/lavender palette, romantic-but-sweet aesthetic (not childish), smooth scrolling between sections, and gentle hover effects with subtle animations (no heavy effects).",
+      "id": "REQ-12",
+      "text": "Persist personalization changes locally in the browser so that customized copy remains after a refresh (use localStorage; no backend persistence).",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-1"
+          "msg-3"
         ],
         "quotes": [
-          "Theme & Style:\n- Color palette: pastel pink, red, white, and lavender\n- Cute hearts, roses, sparkles, and soft animations\n- Romantic but sweet (not childish)\n- Smooth scrolling and gentle hover effects\n- Mobile-friendly and responsive design",
-          "Technical Requirements:\n- Subtle animations (no heavy effects)"
+          "Want to personalize the copy and images, and to add music and all"
         ]
       },
       "acceptanceCriteria": [
-        "Site uses a consistent pastel palette (pink/red/white/lavender) across backgrounds, text accents, buttons, and cards.",
-        "Smooth scrolling is enabled for in-page navigation/CTA scroll actions.",
-        "Hover states exist for buttons/cards/gallery items and are subtle (e.g., small lift/soft glow/scale).",
-        "Animations are lightweight and do not cause noticeable jank on mobile."
+        "After customizing and refreshing the page, the customized values are restored automatically.",
+        "Reset clears the saved customization and reverts to the default config values.",
+        "The site still works normally if localStorage is unavailable or cleared (falls back to defaults)."
       ]
     },
     {
-      "id": "REQ-3",
-      "text": "Build the Hero section with the exact heading and subheading text, add a cute animated heart or floating-hearts background, and implement an “Open My Heart 💌” button that scrolls to the next section.",
+      "id": "REQ-13",
+      "text": "Add image personalization: allow the user to replace gallery images (and optionally hero background/accent image if present) by selecting local image files in the “Customize” panel; show previews and use the selected images in the Gallery section.",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-1"
+          "msg-3"
         ],
         "quotes": [
-          "1. Hero Section (Landing Page)\n- Big romantic heading:\n  \"Happy Valentine’s Day, [Paari] ❤️\"\n- Subheading:\n  \"Every heartbeat of mine belongs to you\"\n- A cute animated heart or floating hearts background\n- A button:\n  \"Open My Heart 💌\" (scrolls to next section)"
+          "Want to personalize the copy and images, and to add music and all"
         ]
       },
       "acceptanceCriteria": [
-        "Hero displays heading: \"Happy Valentine’s Day, Paari ❤️\" and subheading: \"Every heartbeat of mine belongs to you\" (with Paari easily editable as a placeholder).",
-        "Hero contains an animated hearts effect (e.g., floating hearts) without heavy CPU usage.",
-        "Clicking “Open My Heart 💌” smoothly scrolls to the Our Story section."
+        "The Customize panel includes controls to replace each Gallery item image via a local file picker.",
+        "Selected images preview correctly in the panel and render in the Gallery grid in place of the placeholders.",
+        "Selections persist across refresh via localStorage (e.g., stored as data URLs) and can be reset to defaults.",
+        "If a selected image fails to load, the UI gracefully falls back to the default placeholder image."
       ]
     },
     {
-      "id": "REQ-4",
-      "text": "Build the Our Love Story section with the title “Our Story 💕”, render the provided paragraph (preserving line breaks for readability), and include a timeline/cards area with: First Meeting: “14.09.25”, First Memory: “The first sudden kiss from you, iy shaterred The Whole World Of Mee”, Today: “Still choosing you every day ❤️”.",
+      "id": "REQ-14",
+      "text": "Add music personalization: allow the user to add background music either by (a) setting a static local asset path in config (existing valentineContent.surprise.musicPath) or (b) selecting a local audio file in the “Customize” panel; ensure playback is user-initiated and provide play/pause controls after reveal.",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-1"
+          "msg-3"
         ],
         "quotes": [
-          "2. Our Love Story Section\n- Title:\n  \"Our Story 💕\"\n- Short paragraph describing our journey:\n  \"[Happy Valentine’s Day, my love ❤️\n\nAfter reading what you wrote, ...\nI love you. Always. ❤️✨]\"\n- Timeline or cards with:\n  - First Meeting: [14.09.25]\n  - First Memory: [The first sudden kiss from you, iy shaterred The Whole World Of Mee]\n  - Today: \"Still choosing you every day ❤️\""
+          "Want to personalize the copy and images, and to add music and all"
         ]
       },
       "acceptanceCriteria": [
-        "Section title exactly matches: “Our Story 💕”.",
-        "The provided story text is displayed in full and formatted with paragraph spacing/line breaks.",
-        "Timeline/cards display the three entries with the exact provided values and are responsive (stack on mobile, multi-column on larger screens).",
-        "All text values are easy to edit from a single constants/config area in the frontend code."
-      ]
-    },
-    {
-      "id": "REQ-5",
-      "text": "Build the Reasons I Love You section with the title “Why I Love You 💖”, a cute card layout with heart icons, show the provided sample reasons, and allow the user to add more reasons manually via an input + add action (client-side only).",
-      "target": "frontend",
-      "source": {
-        "messageIds": [
-          "msg-1"
-        ],
-        "quotes": [
-          "3. Reasons I Love You Section\n- Title:\n  \"Why I Love You 💖\"\n- Cute card layout with heart icons\n- Sample reasons (editable):\n  - I still choose you… even when you’re angry and I’m confused.\n  - I love you even when you steal the blanket.\n  - Jokes apart, Forever yours. No refund. No exchange\n- Allow me to add more reasons manually"
-        ]
-      },
-      "acceptanceCriteria": [
-        "Section title exactly matches: “Why I Love You 💖”.",
-        "Sample reasons render as individual cards with heart iconography.",
-        "There is a text input and an “Add” action that appends a new reason card immediately (no page reload).",
-        "Added reasons remain visible while the page is open (no backend persistence required).",
-        "Reasons list is easy to edit from a single constants/config area in the frontend code."
-      ]
-    },
-    {
-      "id": "REQ-6",
-      "text": "Build the Gallery section with the title “My Favorite Moments With You 📸”, a responsive grid-style photo gallery using placeholders and captions “[ADD OUR PHOTOS HERE]”, and a soft zoom animation on hover.",
-      "target": "frontend",
-      "source": {
-        "messageIds": [
-          "msg-1"
-        ],
-        "quotes": [
-          "4. Gallery Section\n- Title:\n  \"My Favorite Moments With You 📸\"\n- Grid-style photo gallery\n- Placeholder images with captions:\n  \"[ADD OUR PHOTOS HERE]\"\n- Soft zoom animation on hover"
-        ]
-      },
-      "acceptanceCriteria": [
-        "Section title exactly matches: “My Favorite Moments With You 📸”.",
-        "Gallery renders a responsive grid (1 column on small screens, multiple columns on larger screens).",
-        "Gallery items use placeholder images and show caption text “[ADD OUR PHOTOS HERE]”.",
-        "Hovering a gallery item applies a subtle zoom (and/or slight lift) animation."
-      ]
-    },
-    {
-      "id": "REQ-7",
-      "text": "Build the Love Letter section with the title “A Letter Just for You 💌”, use a handwritten-style Google Font for the letter content, display the provided romantic message text, and include a floating heart animation in the background.",
-      "target": "frontend",
-      "source": {
-        "messageIds": [
-          "msg-1"
-        ],
-        "quotes": [
-          "5. Love Letter Section\n- Title:\n  \"A Letter Just for You 💌\"\n- Handwritten-style font\n- Romantic message:\n  \"My love, [No matter how many jokes I make or how playful I act, know this—my heart is always serious about you. You’re my comfort, my smile, and my safest place. I don’t know what the future holds, but I know I want it with you. Always.]\"\n- Floating heart animation in background"
-        ]
-      },
-      "acceptanceCriteria": [
-        "Section title exactly matches: “A Letter Just for You 💌”.",
-        "Letter text uses a handwritten-style Google Font (loaded via frontend).",
-        "The provided message renders exactly (with bracketed editable portion maintained as a placeholder in code).",
-        "A lightweight floating-heart background animation is visible behind the letter content without harming readability."
-      ]
-    },
-    {
-      "id": "REQ-8",
-      "text": "Build the Special Surprise section with the title “One Last Thing… 🎁”, add a “Click for a Surprise 💖” button that reveals a hidden message “I love you more than words can ever say, Paari ❤️”, and include an optional background music placeholder that can be added later as a local audio asset.",
-      "target": "frontend",
-      "source": {
-        "messageIds": [
-          "msg-1"
-        ],
-        "quotes": [
-          "6. Special Surprise Section\n- Title:\n  \"One Last Thing… 🎁\"\n- Button:\n  \"Click for a Surprise 💖\"\n- On click:\n  - Show a hidden message:\n    \"I love you more than words can ever say, [Paari] ❤️\"\n  - Optional background music:\n    [ADD OUR SONG HERE]"
-        ]
-      },
-      "acceptanceCriteria": [
-        "Section title exactly matches: “One Last Thing… 🎁”.",
-        "Clicking “Click for a Surprise 💖” reveals the hidden message with “Paari” easily editable as a placeholder.",
-        "An audio element/control is present but uses a clearly labeled placeholder source (local file) so the user can add their song later (no external integrations required).",
-        "If no music file is provided, the UI does not break (shows a friendly placeholder state)."
-      ]
-    },
-    {
-      "id": "REQ-9",
-      "text": "Build the Footer with the exact text “Forever Yours, Bubu 💞” and include a small heart animation.",
-      "target": "frontend",
-      "source": {
-        "messageIds": [
-          "msg-1"
-        ],
-        "quotes": [
-          "7. Footer\n- Text:\n  \"Forever Yours, [Bubu] 💞\"\n- Small heart animation"
-        ]
-      },
-      "acceptanceCriteria": [
-        "Footer displays: “Forever Yours, Bubu 💞” with “Bubu” easily editable as a placeholder.",
-        "A small, subtle heart animation appears in or near the footer.",
-        "Footer remains readable and properly spaced on mobile."
-      ]
-    },
-    {
-      "id": "REQ-10",
-      "text": "Ensure all key content is easy to edit (names, headings, story text, timeline entries, reasons, gallery captions/images, love letter text, surprise message, and optional music file path) by centralizing them into a clearly named frontend constants/config structure.",
-      "target": "frontend",
-      "source": {
-        "messageIds": [
-          "msg-1"
-        ],
-        "quotes": [
-          "Technical Requirements:\n- Easy-to-edit placeholders for names, text, images, and music"
-        ]
-      },
-      "acceptanceCriteria": [
-        "There is a single, clearly labeled configuration/constants area in the frontend code that contains the editable values.",
-        "Replacing placeholder values (e.g., names, dates, image paths, music path) updates the rendered site without hunting across multiple files."
+        "A local audio file can be selected in the Customize panel and used as the Surprise section’s music source.",
+        "Music playback only starts as a result of an explicit user interaction (e.g., clicking the Surprise reveal button or pressing Play).",
+        "After the surprise is revealed, the UI provides Play/Pause controls and reflects the current playing state.",
+        "Music selection persists across refresh via localStorage and can be reset to the default valentineContent.surprise.musicPath behavior.",
+        "If no music is available (no file selected and the configured path is missing), the UI shows a clear placeholder/instructional message (English)."
       ]
     }
   ],
   "constraints": [
-    "Frontend must be implemented in React + TypeScript using Tailwind CSS and shadcn/ui components by composition (do not modify any files under frontend/src/components/ui or other immutable paths).",
-    "Backend is not required for this single-page site; do not add backend dependencies unless explicitly needed.",
-    "Use English for any user-facing text in the build request."
+    "Do not edit files under frontend/src/hooks/useInternetIdentity.ts, frontend/src/hooks/useInternetIdentity.tsx, frontend/src/hooks/useActor.ts, frontend/src/main.tsx, or anything under frontend/src/components/ui (compose instead of modifying).",
+    "Keep the backend as a single Motoko actor; do not add backend storage for personalization.",
+    "Do not introduce third-party auth providers; Internet Identity remains the only auth option (not required for this feature).",
+    "Audio autoplay must not occur without user interaction; handle browser autoplay restrictions gracefully."
   ],
   "nonGoals": [
-    "User authentication (including Internet Identity).",
-    "Persisting reasons/gallery/music selections to the backend canister.",
-    "Integrations with external music providers or third-party APIs.",
-    "Real-time features (chat, websockets) or multi-page routing."
+    "No multi-device sync of personalized content.",
+    "No server/canister-side upload or storage of user images/audio.",
+    "No real-time collaboration or sharing links for customized versions."
   ],
   "imageRequirements": {
-    "required": [
-      "Seamless pastel heart pattern background (hearts-bg.dim_1920x1080.png)",
-      "Cute heart icon set, flat pastel style (heart-icons.dim_256x256.png)",
-      "Soft sparkle overlay texture, subtle and airy (sparkles-overlay.dim_1920x1080.png)",
-      "Small rose illustration, pastel romantic style (rose-illustration.dim_512x512.png)",
-      "Placeholder photo tile image with soft gradient and small heart (gallery-placeholder.dim_800x800.png)"
-    ],
+    "required": [],
     "edits": []
   }
 }

@@ -1,15 +1,15 @@
 {
   "schemaVersion": "1.0.0",
-  "projectStateVersion": 3,
+  "projectStateVersion": 5,
   "summary": "Build a cute, romantic, mobile-friendly Valentine’s Day single-page website with pastel aesthetic, smooth scrolling, subtle animations, and editable placeholders for names, text, photos, and optional background music.",
   "architectural_notes": [
     "Use clean HTML/CSS/JavaScript (no heavy effects) for a responsive single-page site with smooth scrolling.",
     "Use Google Fonts for romantic typography; keep names/text/images/music as easy-to-edit placeholders.",
-    "Optional background music should be user-supplied and triggered via user interaction (surprise button)."
+    "Optional background music should be user-supplied and triggered via user interaction (surprise button).",
+    "Background music should be a user-provided local audio asset and must only start after an explicit user interaction; include basic play/pause control state."
   ],
   "known_issues": [],
   "isFixRequest": false,
-  "imageRequirements": "## Required Images\n- Seamless pastel heart pattern background (hearts-bg.dim_1920x1080.png)\n- Cute heart icon set, flat pastel style (heart-icons.dim_256x256.png)\n- Soft sparkle overlay texture, subtle and airy (sparkles-overlay.dim_1920x1080.png)\n- Small rose illustration, pastel romantic style (rose-illustration.dim_512x512.png)\n- Placeholder photo tile image with soft gradient and small heart (gallery-placeholder.dim_800x800.png)",
   "existing_features": [
     {
       "id": "feature-create-a-single-page-valentine-s-day-website-with-7-sections-in-this-order-1-hero-2-our-love-story-3-reasons-i-love-you-4-gallery-5-love-letter-6-special-surprise-7-footer",
@@ -90,6 +90,38 @@
         "REQ-10"
       ],
       "version": 1
+    },
+    {
+      "id": "feature-add-an-in-page-customize-panel-that-lets-the-user-personalize-the-site-copy-hero-name-heading-subheading-story-text-reasons-list-love-letter-text-surprise-message-footer-name-text-at-runtime-without-code-changes",
+      "title": "Add an in-page “Customize” panel that lets the user personalize the site copy (hero name/heading/subheading, story text, reasons list, love letter text, surprise message, footer name/text) at runtime without code changes.",
+      "reqIds": [
+        "REQ-11"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-persist-personalization-changes-locally-in-the-browser-so-that-customized-copy-remains-after-a-refresh-use-localstorage-no-backend-persistence",
+      "title": "Persist personalization changes locally in the browser so that customized copy remains after a refresh (use localStorage; no backend persistence).",
+      "reqIds": [
+        "REQ-12"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-image-personalization-allow-the-user-to-replace-gallery-images-and-optionally-hero-background-accent-image-if-present-by-selecting-local-image-files-in-the-customize-panel-show-previews-and-use-the-selected-images-in-the-gallery-section",
+      "title": "Add image personalization: allow the user to replace gallery images (and optionally hero background/accent image if present) by selecting local image files in the “Customize” panel; show previews and use the selected images in the Gallery section.",
+      "reqIds": [
+        "REQ-13"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-music-personalization-allow-the-user-to-add-background-music-either-by-a-setting-a-static-local-asset-path-in-config-existing-valentinecontent-surprise-musicpath-or-b-selecting-a-local-audio-file-in-the-customize-panel-ensure-playback-is-user-initiated-and-provide-play-pause-controls-after-reveal",
+      "title": "Add music personalization: allow the user to add background music either by (a) setting a static local asset path in config (existing valentineContent.surprise.musicPath) or (b) selecting a local audio file in the “Customize” panel; ensure playback is user-initiated and provide play/pause controls after reveal.",
+      "reqIds": [
+        "REQ-14"
+      ],
+      "version": 1
     }
   ],
   "new_feature_requests": [
@@ -132,6 +164,18 @@
     {
       "id": "AR-7",
       "summary": "Special Surprise section: button reveals hidden message; optional background music placeholder (add song)",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-8",
+      "summary": "Implement background music (user-supplied audio) with user-initiated play/pause triggered from the Surprise interaction",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-9",
+      "summary": "Personalize the site by replacing placeholder copy and gallery images with user-provided text/names/photos (keep content easy to edit)",
       "reqIds": [],
       "status": "pending"
     }

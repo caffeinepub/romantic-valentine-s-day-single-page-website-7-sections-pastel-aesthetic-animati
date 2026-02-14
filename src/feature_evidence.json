@@ -2,13 +2,14 @@
   "kind": "feature_evidence_report",
   "features": [
     {
-      "featureId": "feature-create-a-single-page-valentine-s-day-website-with-7-sections-in-this-order-1-hero-2-our-love-story-3-reasons-i-love-you-4-gallery-5-love-letter-6-special-surprise-7-footer",
-      "featureTitle": "Create a single-page Valentine’s Day website with 7 sections in this order: (1) Hero, (2) Our Love Story, (3) Reasons I Love You, (4) Gallery, (5) Love Letter, (6) Special Surprise, (7) Footer.",
+      "featureId": "feature-add-an-in-page-customize-panel-that-lets-the-user-personalize-the-site-copy-hero-name-heading-subheading-story-text-reasons-list-love-letter-text-surprise-message-footer-name-text-at-runtime-without-code-changes",
+      "featureTitle": "Add an in-page “Customize” panel that lets the user personalize the site copy (hero name/heading/subheading, story text, reasons list, love letter text, surprise message, footer name/text) at runtime without code changes.",
       "files": [
-        "frontend/src/App.tsx",
         "frontend/src/pages/ValentineSinglePage.tsx",
+        "frontend/src/personalization/CustomizePanel.tsx",
+        "frontend/src/personalization/PersonalizationContext.tsx",
+        "frontend/src/personalization/types.ts",
         "frontend/src/sections/FooterSection.tsx",
-        "frontend/src/sections/GallerySection.tsx",
         "frontend/src/sections/HeroSection.tsx",
         "frontend/src/sections/LoveLetterSection.tsx",
         "frontend/src/sections/OurStorySection.tsx",
@@ -23,16 +24,17 @@
         "github-export-icp-cli@1.0.0"
       ],
       "testIds": [
-        "REQ-1"
+        "REQ-11"
       ],
       "confidence": "high"
     },
     {
-      "featureId": "feature-implement-the-requested-theme-and-interaction-design-across-the-site-pastel-pink-red-white-lavender-palette-romantic-but-sweet-aesthetic-not-childish-smooth-scrolling-between-sections-and-gentle-hover-effects-with-subtle-animations-no-heavy-effects",
-      "featureTitle": "Implement the requested theme and interaction design across the site: pastel pink/red/white/lavender palette, romantic-but-sweet aesthetic (not childish), smooth scrolling between sections, and gentle hover effects with subtle animations (no heavy effects).",
+      "featureId": "feature-persist-personalization-changes-locally-in-the-browser-so-that-customized-copy-remains-after-a-refresh-use-localstorage-no-backend-persistence",
+      "featureTitle": "Persist personalization changes locally in the browser so that customized copy remains after a refresh (use localStorage; no backend persistence).",
       "files": [
-        "frontend/src/index.css",
-        "frontend/tailwind.config.js"
+        "frontend/src/personalization/CustomizePanel.tsx",
+        "frontend/src/personalization/PersonalizationContext.tsx",
+        "frontend/src/personalization/storage.ts"
       ],
       "components": [
         "core-infrastructure@1.0.2",
@@ -42,73 +44,18 @@
         "github-export-icp-cli@1.0.0"
       ],
       "testIds": [
-        "REQ-2"
+        "REQ-12"
       ],
       "confidence": "high"
     },
     {
-      "featureId": "feature-build-the-hero-section-with-the-exact-heading-and-subheading-text-add-a-cute-animated-heart-or-floating-hearts-background-and-implement-an-open-my-heart-button-that-scrolls-to-the-next-section",
-      "featureTitle": "Build the Hero section with the exact heading and subheading text, add a cute animated heart or floating-hearts background, and implement an “Open My Heart 💌” button that scrolls to the next section.",
+      "featureId": "feature-add-image-personalization-allow-the-user-to-replace-gallery-images-and-optionally-hero-background-accent-image-if-present-by-selecting-local-image-files-in-the-customize-panel-show-previews-and-use-the-selected-images-in-the-gallery-section",
+      "featureTitle": "Add image personalization: allow the user to replace gallery images (and optionally hero background/accent image if present) by selecting local image files in the “Customize” panel; show previews and use the selected images in the Gallery section.",
       "files": [
-        "frontend/src/components/HeartsBackground.tsx",
-        "frontend/src/config/valentineContent.ts",
-        "frontend/src/sections/HeroSection.tsx"
-      ],
-      "components": [
-        "core-infrastructure@1.0.2",
-        "shadcn-ui@1.0.0",
-        "build-template-react@1.0.0",
-        "initial-app@1.0.0",
-        "github-export-icp-cli@1.0.0"
-      ],
-      "testIds": [
-        "REQ-3"
-      ],
-      "confidence": "high"
-    },
-    {
-      "featureId": "feature-build-the-our-love-story-section-with-the-title-our-story-render-the-provided-paragraph-preserving-line-breaks-for-readability-and-include-a-timeline-cards-area-with-first-meeting-14-09-25-first-memory-the-first-sudden-kiss-from-you-iy-shaterred-the-whole-world-of-mee-today-still-choosing-you-every-day",
-      "featureTitle": "Build the Our Love Story section with the title “Our Story 💕”, render the provided paragraph (preserving line breaks for readability), and include a timeline/cards area with: First Meeting: “14.09.25”, First Memory: “The first sudden kiss from you, iy shaterred The Whole World Of Mee”, Today: “Still choosing you every day ❤️”.",
-      "files": [
-        "frontend/src/config/valentineContent.ts",
-        "frontend/src/sections/OurStorySection.tsx"
-      ],
-      "components": [
-        "core-infrastructure@1.0.2",
-        "shadcn-ui@1.0.0",
-        "build-template-react@1.0.0",
-        "initial-app@1.0.0",
-        "github-export-icp-cli@1.0.0"
-      ],
-      "testIds": [
-        "REQ-4"
-      ],
-      "confidence": "high"
-    },
-    {
-      "featureId": "feature-build-the-reasons-i-love-you-section-with-the-title-why-i-love-you-a-cute-card-layout-with-heart-icons-show-the-provided-sample-reasons-and-allow-the-user-to-add-more-reasons-manually-via-an-input-add-action-client-side-only",
-      "featureTitle": "Build the Reasons I Love You section with the title “Why I Love You 💖”, a cute card layout with heart icons, show the provided sample reasons, and allow the user to add more reasons manually via an input + add action (client-side only).",
-      "files": [
-        "frontend/src/config/valentineContent.ts",
-        "frontend/src/sections/ReasonsILoveYouSection.tsx"
-      ],
-      "components": [
-        "core-infrastructure@1.0.2",
-        "shadcn-ui@1.0.0",
-        "build-template-react@1.0.0",
-        "initial-app@1.0.0",
-        "github-export-icp-cli@1.0.0"
-      ],
-      "testIds": [
-        "REQ-5"
-      ],
-      "confidence": "high"
-    },
-    {
-      "featureId": "feature-build-the-gallery-section-with-the-title-my-favorite-moments-with-you-a-responsive-grid-style-photo-gallery-using-placeholders-and-captions-add-our-photos-here-and-a-soft-zoom-animation-on-hover",
-      "featureTitle": "Build the Gallery section with the title “My Favorite Moments With You 📸”, a responsive grid-style photo gallery using placeholders and captions “[ADD OUR PHOTOS HERE]”, and a soft zoom animation on hover.",
-      "files": [
-        "frontend/src/config/valentineContent.ts",
+        "frontend/src/personalization/CustomizePanel.tsx",
+        "frontend/src/personalization/imageUtils.ts",
+        "frontend/src/personalization/storage.ts",
+        "frontend/src/personalization/types.ts",
         "frontend/src/sections/GallerySection.tsx"
       ],
       "components": [
@@ -119,36 +66,18 @@
         "github-export-icp-cli@1.0.0"
       ],
       "testIds": [
-        "REQ-6"
+        "REQ-13"
       ],
       "confidence": "high"
     },
     {
-      "featureId": "feature-build-the-love-letter-section-with-the-title-a-letter-just-for-you-use-a-handwritten-style-google-font-for-the-letter-content-display-the-provided-romantic-message-text-and-include-a-floating-heart-animation-in-the-background",
-      "featureTitle": "Build the Love Letter section with the title “A Letter Just for You 💌”, use a handwritten-style Google Font for the letter content, display the provided romantic message text, and include a floating heart animation in the background.",
+      "featureId": "feature-add-music-personalization-allow-the-user-to-add-background-music-either-by-a-setting-a-static-local-asset-path-in-config-existing-valentinecontent-surprise-musicpath-or-b-selecting-a-local-audio-file-in-the-customize-panel-ensure-playback-is-user-initiated-and-provide-play-pause-controls-after-reveal",
+      "featureTitle": "Add music personalization: allow the user to add background music either by (a) setting a static local asset path in config (existing valentineContent.surprise.musicPath) or (b) selecting a local audio file in the “Customize” panel; ensure playback is user-initiated and provide play/pause controls after reveal.",
       "files": [
-        "frontend/index.html",
-        "frontend/src/components/HeartsBackground.tsx",
-        "frontend/src/config/valentineContent.ts",
-        "frontend/src/sections/LoveLetterSection.tsx"
-      ],
-      "components": [
-        "core-infrastructure@1.0.2",
-        "shadcn-ui@1.0.0",
-        "build-template-react@1.0.0",
-        "initial-app@1.0.0",
-        "github-export-icp-cli@1.0.0"
-      ],
-      "testIds": [
-        "REQ-7"
-      ],
-      "confidence": "high"
-    },
-    {
-      "featureId": "feature-build-the-special-surprise-section-with-the-title-one-last-thing-add-a-click-for-a-surprise-button-that-reveals-a-hidden-message-i-love-you-more-than-words-can-ever-say-paari-and-include-an-optional-background-music-placeholder-that-can-be-added-later-as-a-local-audio-asset",
-      "featureTitle": "Build the Special Surprise section with the title “One Last Thing… 🎁”, add a “Click for a Surprise 💖” button that reveals a hidden message “I love you more than words can ever say, Paari ❤️”, and include an optional background music placeholder that can be added later as a local audio asset.",
-      "files": [
-        "frontend/src/config/valentineContent.ts",
+        "frontend/src/personalization/CustomizePanel.tsx",
+        "frontend/src/personalization/audioUtils.ts",
+        "frontend/src/personalization/storage.ts",
+        "frontend/src/personalization/types.ts",
         "frontend/src/sections/SpecialSurpriseSection.tsx"
       ],
       "components": [
@@ -159,45 +88,7 @@
         "github-export-icp-cli@1.0.0"
       ],
       "testIds": [
-        "REQ-8"
-      ],
-      "confidence": "high"
-    },
-    {
-      "featureId": "feature-build-the-footer-with-the-exact-text-forever-yours-bubu-and-include-a-small-heart-animation",
-      "featureTitle": "Build the Footer with the exact text “Forever Yours, Bubu 💞” and include a small heart animation.",
-      "files": [
-        "frontend/src/config/valentineContent.ts",
-        "frontend/src/sections/FooterSection.tsx"
-      ],
-      "components": [
-        "core-infrastructure@1.0.2",
-        "shadcn-ui@1.0.0",
-        "build-template-react@1.0.0",
-        "initial-app@1.0.0",
-        "github-export-icp-cli@1.0.0"
-      ],
-      "testIds": [
-        "REQ-9"
-      ],
-      "confidence": "high"
-    },
-    {
-      "featureId": "feature-ensure-all-key-content-is-easy-to-edit-names-headings-story-text-timeline-entries-reasons-gallery-captions-images-love-letter-text-surprise-message-and-optional-music-file-path-by-centralizing-them-into-a-clearly-named-frontend-constants-config-structure",
-      "featureTitle": "Ensure all key content is easy to edit (names, headings, story text, timeline entries, reasons, gallery captions/images, love letter text, surprise message, and optional music file path) by centralizing them into a clearly named frontend constants/config structure.",
-      "files": [
-        "frontend/src/config/valentineContent.ts",
-        "frontend/src/pages/ValentineSinglePage.tsx"
-      ],
-      "components": [
-        "core-infrastructure@1.0.2",
-        "shadcn-ui@1.0.0",
-        "build-template-react@1.0.0",
-        "initial-app@1.0.0",
-        "github-export-icp-cli@1.0.0"
-      ],
-      "testIds": [
-        "REQ-10"
+        "REQ-14"
       ],
       "confidence": "high"
     }

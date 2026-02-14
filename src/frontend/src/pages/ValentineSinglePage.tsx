@@ -1,3 +1,5 @@
+import { PersonalizationProvider } from '../personalization/PersonalizationContext';
+import CustomizePanel from '../personalization/CustomizePanel';
 import HeroSection from '../sections/HeroSection';
 import OurStorySection from '../sections/OurStorySection';
 import ReasonsILoveYouSection from '../sections/ReasonsILoveYouSection';
@@ -8,14 +10,17 @@ import FooterSection from '../sections/FooterSection';
 
 export default function ValentineSinglePage() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-pastel-pink via-white to-pastel-lavender">
-      <HeroSection />
-      <OurStorySection />
-      <ReasonsILoveYouSection />
-      <GallerySection />
-      <LoveLetterSection />
-      <SpecialSurpriseSection />
-      <FooterSection />
-    </div>
+    <PersonalizationProvider>
+      <div className="min-h-screen bg-gradient-to-b from-pastel-pink via-white to-pastel-lavender">
+        <HeroSection />
+        <OurStorySection />
+        <ReasonsILoveYouSection />
+        <GallerySection />
+        <LoveLetterSection />
+        <SpecialSurpriseSection />
+        <FooterSection />
+        <CustomizePanel />
+      </div>
+    </PersonalizationProvider>
   );
 }
