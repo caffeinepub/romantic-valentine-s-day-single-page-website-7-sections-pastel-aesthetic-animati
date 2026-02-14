@@ -1,0 +1,16 @@
+{
+  "frontend/src/App.tsx": "Main app component that renders the single-page Valentine's Day website.",
+  "frontend/src/pages/ValentineSinglePage.tsx": "Single-page container that composes all 7 sections with gradient background.",
+  "frontend/src/sections/HeroSection.tsx": "Hero section with animated hearts background, romantic heading with girlfriend's name, and smooth-scroll CTA button.",
+  "frontend/src/sections/OurStorySection.tsx": "Our Story section displaying the love letter text and timeline cards with first meeting, first memory, and today milestones.",
+  "frontend/src/sections/ReasonsILoveYouSection.tsx": "Interactive section showing reasons for love with heart icons and ability to add new reasons via input field.",
+  "frontend/src/sections/GallerySection.tsx": "Photo gallery section with responsive grid, placeholder images, and zoom hover effects.",
+  "frontend/src/sections/LoveLetterSection.tsx": "Love letter section with handwritten font, romantic message, and floating hearts background.",
+  "frontend/src/sections/SpecialSurpriseSection.tsx": "Surprise section with reveal button, hidden message, and optional background music player.",
+  "frontend/src/sections/FooterSection.tsx": "Footer with personalized message, animated heart, and Caffeine.ai attribution with UTM tracking.",
+  "frontend/src/components/HeartsBackground.tsx": "Reusable floating hearts animation component with dense and sparse variants.",
+  "frontend/src/config/valentineContent.ts": "Centralized configuration file containing all editable content (names, text, timeline, reasons, gallery, messages, music path).",
+  "frontend/src/index.css": "Global styles with pastel Valentine's theme using OKLCH colors, romantic fonts (Poppins and Dancing Script), smooth scrolling, and custom animations.",
+  "frontend/tailwind.config.js": "Tailwind configuration extended with romantic color palette, custom fonts, and Valentine-themed design tokens.",
+  "frontend/index.html": "HTML entry point with Google Fonts preloaded for Poppins and Dancing Script fonts."
+}

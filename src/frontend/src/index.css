@@ -1,0 +1,216 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    :root {
+        --radius: 1rem;
+        
+        /* Pastel Valentine's Theme - Light Mode */
+        --background: 0.99 0.01 340;
+        --foreground: 0.25 0.02 340;
+        --card: 1 0 0;
+        --card-foreground: 0.25 0.02 340;
+        --popover: 1 0 0;
+        --popover-foreground: 0.25 0.02 340;
+        --primary: 0.65 0.18 10;
+        --primary-foreground: 1 0 0;
+        --secondary: 0.95 0.03 340;
+        --secondary-foreground: 0.25 0.02 340;
+        --muted: 0.96 0.02 340;
+        --muted-foreground: 0.55 0.02 340;
+        --accent: 0.92 0.05 280;
+        --accent-foreground: 0.25 0.02 340;
+        --destructive: 0.60 0.20 15;
+        --destructive-foreground: 1 0 0;
+        --border: 0.90 0.03 340;
+        --input: 0.90 0.03 340;
+        --ring: 0.75 0.15 340;
+        
+        /* Custom Valentine Colors */
+        --romantic-red: 0.60 0.20 15;
+        --romantic-red-dark: 0.50 0.22 15;
+        --romantic-pink: 0.75 0.15 340;
+        --pastel-pink: 0.92 0.05 340;
+        --pastel-lavender: 0.88 0.08 280;
+    }
+
+    .dark {
+        --background: 0.20 0.02 340;
+        --foreground: 0.98 0.01 340;
+        --card: 0.25 0.02 340;
+        --card-foreground: 0.98 0.01 340;
+        --popover: 0.25 0.02 340;
+        --popover-foreground: 0.98 0.01 340;
+        --primary: 0.75 0.15 340;
+        --primary-foreground: 0.20 0.02 340;
+        --secondary: 0.30 0.03 340;
+        --secondary-foreground: 0.98 0.01 340;
+        --muted: 0.30 0.03 340;
+        --muted-foreground: 0.65 0.03 340;
+        --accent: 0.40 0.05 280;
+        --accent-foreground: 0.98 0.01 340;
+        --destructive: 0.65 0.18 15;
+        --destructive-foreground: 0.98 0.01 340;
+        --border: 0.35 0.03 340;
+        --input: 0.35 0.03 340;
+        --ring: 0.60 0.12 340;
+        
+        /* Custom Valentine Colors - Dark Mode */
+        --romantic-red: 0.65 0.18 15;
+        --romantic-red-dark: 0.55 0.20 15;
+        --romantic-pink: 0.70 0.12 340;
+        --pastel-pink: 0.45 0.08 340;
+        --pastel-lavender: 0.50 0.10 280;
+    }
+
+    * {
+        @apply border-border;
+    }
+    
+    body {
+        @apply bg-background text-foreground;
+        font-family: 'Poppins', sans-serif;
+    }
+    
+    html {
+        scroll-behavior: smooth;
+    }
+}
+
+@layer utilities {
+    .font-handwritten {
+        font-family: 'Dancing Script', cursive;
+    }
+    
+    .text-romantic-red {
+        color: oklch(var(--romantic-red));
+    }
+    
+    .bg-romantic-red {
+        background-color: oklch(var(--romantic-red));
+    }
+    
+    .bg-romantic-red-dark {
+        background-color: oklch(var(--romantic-red-dark));
+    }
+    
+    .text-romantic-pink {
+        color: oklch(var(--romantic-pink));
+    }
+    
+    .bg-romantic-pink {
+        background-color: oklch(var(--romantic-pink));
+    }
+    
+    .bg-pastel-pink {
+        background-color: oklch(var(--pastel-pink));
+    }
+    
+    .from-pastel-pink {
+        --tw-gradient-from: oklch(var(--pastel-pink));
+        --tw-gradient-to: oklch(var(--pastel-pink) / 0);
+        --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+    }
+    
+    .to-pastel-lavender {
+        --tw-gradient-to: oklch(var(--pastel-lavender));
+    }
+    
+    .from-pastel-lavender {
+        --tw-gradient-from: oklch(var(--pastel-lavender));
+        --tw-gradient-to: oklch(var(--pastel-lavender) / 0);
+        --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+    }
+    
+    .border-romantic-pink {
+        border-color: oklch(var(--romantic-pink));
+    }
+    
+    .shadow-romantic {
+        box-shadow: 0 10px 30px -5px oklch(var(--romantic-pink) / 0.3);
+    }
+    
+    .shadow-romantic-lg {
+        box-shadow: 0 20px 40px -10px oklch(var(--romantic-pink) / 0.4);
+    }
+    
+    .shadow-soft {
+        box-shadow: 0 4px 20px -2px oklch(var(--romantic-pink) / 0.15);
+    }
+    
+    .animate-fade-in {
+        animation: fadeIn 1s ease-in forwards;
+    }
+    
+    .animate-fade-in-delay {
+        animation: fadeIn 1s ease-in 0.3s forwards;
+        opacity: 0;
+    }
+    
+    .animate-fade-in-delay-2 {
+        animation: fadeIn 1s ease-in 0.6s forwards;
+        opacity: 0;
+    }
+    
+    .animate-float-heart {
+        animation: floatHeart 10s ease-in-out infinite;
+    }
+    
+    .animate-pulse-gentle {
+        animation: pulseGentle 2s ease-in-out infinite;
+    }
+    
+    .animate-heartbeat {
+        animation: heartbeat 1.5s ease-in-out infinite;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes floatHeart {
+    0%, 100% {
+        transform: translateY(0) rotate(0deg);
+    }
+    25% {
+        transform: translateY(-20px) rotate(5deg);
+    }
+    50% {
+        transform: translateY(-10px) rotate(-5deg);
+    }
+    75% {
+        transform: translateY(-30px) rotate(3deg);
+    }
+}
+
+@keyframes pulseGentle {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+@keyframes heartbeat {
+    0%, 100% {
+        transform: scale(1);
+    }
+    10%, 30% {
+        transform: scale(1.1);
+    }
+    20%, 40% {
+        transform: scale(1);
+    }
+}
